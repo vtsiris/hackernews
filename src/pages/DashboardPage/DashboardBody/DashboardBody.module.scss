@@ -1,0 +1,36 @@
+.bodyContainer {
+  @media (min-width: 768px) {
+    padding: 30px 50px;
+  }
+  height: 80vh;
+  overflow: auto;
+  flex: 1 1;
+  padding: 30px 20px;
+}
+
+.newsLoading {
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadMoreButtonWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.loadMoreButton {
+  width: 100px;
+  height: 40px;
+  margin: 10px 0px;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: #ffff;
+  text-align: center;
+  background: #2d3ea7;
+  border-radius: 6px;
+  cursor: pointer;
+}

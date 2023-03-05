@@ -1,0 +1,45 @@
+.headlineContainer {
+  @media (min-width: 768px) {
+    padding-bottom: 30px;
+  }
+  @media (min-width: 1280px) {
+    padding-bottom: 10px;
+  }
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
+  @media (min-width: 1280px) {
+    font-size: 14px;
+  }
+  font-size: 18px;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.storyTitle {
+  @media (min-width: 768px) {
+    font-size: 24px;
+  }
+  @media (min-width: 1280px) {
+    font-size: 20px;
+  }
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.url {
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
+  @media (min-width: 1280px) {
+    font-size: 14px;
+  }
+  font-size: 18px;
+}
