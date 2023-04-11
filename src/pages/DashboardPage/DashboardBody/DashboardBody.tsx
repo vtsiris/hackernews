@@ -101,7 +101,7 @@ export default function DashboardBody({
     }
   };
 
-  const setStoryListIndexHandler = useCallback(() => {
+  const setStoryListIndexHandler = useCallback((): void => {
     setStoryListIndex((prevState: number) => prevState + 10);
   }, []);
 
