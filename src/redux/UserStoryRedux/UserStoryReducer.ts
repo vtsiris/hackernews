@@ -31,7 +31,6 @@ const userStoryReducer = (
     case UserStoryActions.GET_USER_STORY_SUCCESS:
       return {
         ...state,
-        userStoryList: state.userStoryList.concat(action.payload),
         userStoryLoadingState: LoadingStateEnum.InitialState,
       };
     case UserStoryActions.GET_USER_STORY_FAIL:
@@ -43,6 +42,7 @@ const userStoryReducer = (
       return {
         ...state,
         userStoryListLoadingState: LoadingStateEnum.CompletedState,
+        userStoryList: state.userStoryList.concat(...action.payload),
       };
     case UserStoryActions.GET_USER_STORY_LIST_FAIL:
       return {

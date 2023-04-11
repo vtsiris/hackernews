@@ -15,7 +15,6 @@ export interface IGetUserStory {
 }
 export interface IGetUserStorySuccess {
   type: typeof UserStoryActions.GET_USER_STORY_SUCCESS;
-  payload: IUserStory;
 }
 export interface IGetUserStoryFail {
   type: typeof UserStoryActions.GET_USER_STORY_FAIL;
@@ -24,6 +23,7 @@ export interface IGetUserStoryFail {
 
 export interface IGetUserStoryListSuccess {
   type: typeof UserStoryActions.GET_USER_STORY_LIST_SUCCESS;
+  payload: IUserStory[];
 }
 export interface IGetUserStoryListFail {
   type: typeof UserStoryActions.GET_USER_STORY_LIST_FAIL;
@@ -34,19 +34,19 @@ export const getUserStoryAction = (storyID: number[]): IGetUserStory => ({
   type: UserStoryActions.GET_USER_STORY,
   payload: storyID,
 });
-export const getUserStorySuccessAction = (
-  payload: IUserStory
-): IGetUserStorySuccess => ({
+export const getUserStorySuccessAction = (): IGetUserStorySuccess => ({
   type: UserStoryActions.GET_USER_STORY_SUCCESS,
-  payload: payload,
 });
 export const getUserStoryFailAction = (error: any): IGetUserStoryFail => ({
   type: UserStoryActions.GET_USER_STORY_FAIL,
   payload: error,
 });
 
-export const getUserStoryListSuccessAction = (): IGetUserStoryListSuccess => ({
+export const getUserStoryListSuccessAction = (
+  payload: IUserStory[]
+): IGetUserStoryListSuccess => ({
   type: UserStoryActions.GET_USER_STORY_LIST_SUCCESS,
+  payload: payload,
 });
 export const getUserStoryListFailAction = (
   error: any

@@ -23,6 +23,7 @@ export default RootSaga;
 
 function* getUserStory(payload: IGetUserStory) {
   try {
+    const userStoryList: IUserStory[] = [];
     for (let i = 0; i < payload?.payload?.length; i++) {
       const getStoryPayload: IGetStory = {
         type: StoryActions.GET_STORY,
@@ -40,9 +41,13 @@ function* getUserStory(payload: IGetUserStory) {
         story: story,
         user: user,
       };
-      yield put(getUserStorySuccessAction(userStory));
+      userStoryList.push(userStory);
+
+      yield put(getUserStorySuccessAction());
     }
-    yield put(getUserStoryListSuccessAction());
+    if (!!userStoryList?.length) {
+      yield put(getUserStoryListSuccessAction(userStoryList));
+    }
   } catch (e: any) {
     yield put(getUserStoryFailAction(e));
     yield put(getUserStoryListFailAction(e));
