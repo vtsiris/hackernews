@@ -42,7 +42,6 @@ export default function DashboardBody({
   const [storyList, setStoryList] = useState<IUserStory[]>([]);
 
   useEffect(() => {
-    console.log("1o");
     dispatch(getTopStoryUIDListAction());
   }, [dispatch]);
 
@@ -51,7 +50,6 @@ export default function DashboardBody({
       storyListIndex - 10,
       storyListIndex
     );
-    console.log("2o");
     if (!!storyUIDList?.length) {
       dispatch(getUserStoryAction(storyUIDList));
     }
