@@ -16,17 +16,7 @@ export default function StoryHeadline({ userStory }: IStoryHeadlineProps) {
           "MMM Do YYYY"
         )}
       </span>
-      <span className={styles.storyTitle}>
-        {`${userStory?.story?.title} - `}
-        <a
-          href={userStory?.story?.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.url}
-        >
-          link
-        </a>
-      </span>
+      <span className={styles.storyTitle}>{userStory?.story?.title}</span>
     </div>
   );
 }
