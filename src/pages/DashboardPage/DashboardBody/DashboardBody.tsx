@@ -43,17 +43,17 @@ export default function DashboardBody({
 
   useEffect(() => {
     dispatch(getTopStoriesAction());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    const stories: number[] = (topStoryList || [])?.slice(
+    const storyUIDList: number[] = (topStoryList || [])?.slice(
       storyListIndex - 10,
       storyListIndex
     );
-    if (!!stories?.length) {
-      dispatch(getUserStoryAction(stories));
+    if (!!storyUIDList?.length) {
+      dispatch(getUserStoryAction(storyUIDList));
     }
-  }, [topStoryList, storyListIndex]);
+  }, [topStoryList, storyListIndex, dispatch]);
 
   useLayoutEffect(() => {
     if (userStoryListLoadingState === LoadingStateEnum.CompletedState) {
@@ -66,7 +66,7 @@ export default function DashboardBody({
         setStoryList(userStoryList);
       }
     }
-  }, [userStoryList, userStoryListLoadingState]);
+  }, [storyListIndex, userStoryList, userStoryListLoadingState]);
 
   useLayoutEffect(() => {
     const container: HTMLDivElement | null =
@@ -77,7 +77,7 @@ export default function DashboardBody({
         container?.scrollWidth > container?.clientWidth;
       setHasOverflow(elementOverflow);
     }
-  }, [storyList]);
+  }, [setHasOverflow, storyList]);
 
   useLayoutEffect(() => {
     const sortedStories: IUserStory[] = (storyList || []).sort(
@@ -85,7 +85,7 @@ export default function DashboardBody({
     );
     setStoryList(sortedStories);
     setSortNews(false);
-  }, [sortNews]);
+  }, [setSortNews, sortNews, storyList]);
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>): void => {
     const element = e?.target as HTMLDivElement;
