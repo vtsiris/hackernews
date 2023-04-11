@@ -1,4 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 import styles from "./DashboardBody.module.scss";
 import StoryCard from "./StoryCard/StoryCard";
@@ -95,6 +101,10 @@ export default function DashboardBody({
     }
   };
 
+  const setStoryListIndexHandler = useCallback(() => {
+    setStoryListIndex((prevState: number) => prevState + 10);
+  }, []);
+
   return (
     <>
       <div
@@ -119,9 +129,7 @@ export default function DashboardBody({
         <div className={styles.loadMoreButtonWrapper}>
           <button
             className={styles.loadMoreButton}
-            onClick={() =>
-              setStoryListIndex((prevState: number) => prevState + 10)
-            }
+            onClick={setStoryListIndexHandler}
           >
             Load more
           </button>
