@@ -29,3 +29,9 @@ export const getUserStoryListLoadingStateSelector = createSelector(
   getUserStoryListLoadingState,
   (loadingState: LoadingStateEnum): LoadingStateEnum => loadingState
 );
+
+export const getUserStoryListIsCompletedLoadingStateSelector = createSelector(
+  getUserStoryListLoadingState,
+  (loadingState: LoadingStateEnum): boolean =>
+    loadingState === LoadingStateEnum.CompletedState
+);

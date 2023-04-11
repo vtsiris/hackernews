@@ -5,13 +5,12 @@ import StoryCard from "./StoryCard/StoryCard";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { LoadingStateEnum } from "../../../models/SharedModel";
 import { IUserStory } from "../../../models/UserStoryModel";
 import { getTopStoryUIDListAction } from "../../../redux/StoryRedux/StoryActions";
 import { getTopStoryUIDListSelector } from "../../../redux/StoryRedux/StorySelector";
 import { getUserStoryAction } from "../../../redux/UserStoryRedux/UserStoryActions";
 import {
-  getUserStoryListLoadingStateSelector,
+  getUserStoryListIsCompletedLoadingStateSelector,
   getUserStoryListSelector,
 } from "../../../redux/UserStoryRedux/UserStorySelector";
 
@@ -34,8 +33,8 @@ export default function DashboardBody({
 
   const topStoryUIDList: number[] = useSelector(getTopStoryUIDListSelector);
   const userStoryList: IUserStory[] = useSelector(getUserStoryListSelector);
-  const userStoryListLoadingState: LoadingStateEnum = useSelector(
-    getUserStoryListLoadingStateSelector
+  const isUserStoryListLoadingCompleted: boolean = useSelector(
+    getUserStoryListIsCompletedLoadingStateSelector
   );
 
   const [storyListIndex, setStoryListIndex] = useState<number>(10);
@@ -56,7 +55,7 @@ export default function DashboardBody({
   }, [topStoryUIDList, storyListIndex, dispatch]);
 
   useLayoutEffect(() => {
-    if (userStoryListLoadingState === LoadingStateEnum.CompletedState) {
+    if (!!isUserStoryListLoadingCompleted) {
       if (storyListIndex === 10) {
         const sortedStories: IUserStory[] = userStoryList.sort(
           (a, b) => a?.story?.score - b?.story?.score
@@ -66,7 +65,7 @@ export default function DashboardBody({
         setStoryList(userStoryList);
       }
     }
-  }, [storyListIndex, userStoryList, userStoryListLoadingState]);
+  }, [isUserStoryListLoadingCompleted, storyListIndex, userStoryList]);
 
   useLayoutEffect(() => {
     const container: HTMLDivElement | null =
@@ -116,19 +115,18 @@ export default function DashboardBody({
           />
         ))}
       </div>
-      {!hasOverflow &&
-        userStoryListLoadingState === LoadingStateEnum.CompletedState && (
-          <div className={styles.loadMoreButtonWrapper}>
-            <button
-              className={styles.loadMoreButton}
-              onClick={() =>
-                setStoryListIndex((prevState: number) => prevState + 10)
-              }
-            >
-              Load more
-            </button>
-          </div>
-        )}
+      {!hasOverflow && !!isUserStoryListLoadingCompleted && (
+        <div className={styles.loadMoreButtonWrapper}>
+          <button
+            className={styles.loadMoreButton}
+            onClick={() =>
+              setStoryListIndex((prevState: number) => prevState + 10)
+            }
+          >
+            Load more
+          </button>
+        </div>
+      )}
     </>
   );
 }
