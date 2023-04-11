@@ -1,7 +1,7 @@
 import axios from "axios";
 import { IStory } from "../../models/StoryModel";
 
-export const getTopStoryListAsync = () => {
+export const getTopStoryUIDListAsync = () => {
   return axios.get<number[]>(
     `https://hacker-news.firebaseio.com/v0/topstories.json`
   );

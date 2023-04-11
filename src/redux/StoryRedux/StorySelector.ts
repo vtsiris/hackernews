@@ -2,18 +2,18 @@ import { createSelector } from "reselect";
 import { LoadingStateEnum } from "../../models/SharedModel";
 import { AppState } from "../RootReducer";
 
-const getTopStoryList = (state: AppState): number[] => {
-  return state?.storyReducer?.topStoryList;
+const getTopStoryUIDList = (state: AppState): number[] => {
+  return state?.storyReducer?.topStoryUIDList;
 };
-export const getTopStoryListSelector = createSelector(
-  getTopStoryList,
-  (topStoryList: number[]): number[] => topStoryList
+export const getTopStoryUIDListSelector = createSelector(
+  getTopStoryUIDList,
+  (topStoryUIDList: number[]): number[] => topStoryUIDList
 );
 
-const getTopStoryListLoadingState = (state: AppState): LoadingStateEnum => {
-  return state?.storyReducer?.topStoryListLoadingState;
+const getTopStoryUIDListLoadingState = (state: AppState): LoadingStateEnum => {
+  return state?.storyReducer?.topStoryUIDListLoadingState;
 };
-export const getTopStoryListLoadingStateSelector = createSelector(
-  getTopStoryListLoadingState,
+export const getTopStorUIDyListLoadingStateSelector = createSelector(
+  getTopStoryUIDListLoadingState,
   (LoadingState: LoadingStateEnum): LoadingStateEnum => LoadingState
 );

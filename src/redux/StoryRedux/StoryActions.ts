@@ -1,24 +1,24 @@
 import { IStory } from "../../models/StoryModel";
 
 export enum StoryActions {
-  GET_TOP_STORIES = "GET_TOP_STORIES",
-  GET_TOP_STORIES_SUCCESS = "GET_TOP_STORIES_SUCCESS",
-  GET_TOP_STORIES_FAIL = "GET_TOP_STORIES_FAIL",
+  GET_TOP_STORY_UID_LIST = "GET_TOP_STORY_UID_LIST",
+  GET_TOP_STORY_UID_LIST_SUCCESS = "GET_TOP_STORY_UID_LIST_SUCCESS",
+  GET_TOP_STORY_UID_LIST_FAIL = "GET_TOP_STORY_UID_LIST_FAIL",
 
   GET_STORY = "GET_STORY",
   GET_STORY_SUCCESS = "GET_STORY_SUCCESS",
   GET_STORY_FAIL = "GET_STORY_FAIL",
 }
 
-export interface IGetTopStories {
-  type: typeof StoryActions.GET_TOP_STORIES;
+export interface IGetTopStoryUIDList {
+  type: typeof StoryActions.GET_TOP_STORY_UID_LIST;
 }
-export interface IGetTopStoriesSuccess {
-  type: typeof StoryActions.GET_TOP_STORIES_SUCCESS;
+export interface IGetTopStoryUIDListSuccess {
+  type: typeof StoryActions.GET_TOP_STORY_UID_LIST_SUCCESS;
   payload: number[];
 }
-export interface IGetTopStoriesFail {
-  type: typeof StoryActions.GET_TOP_STORIES_FAIL;
+export interface IGetTopStoryUIDListFail {
+  type: typeof StoryActions.GET_TOP_STORY_UID_LIST_FAIL;
   payload: any;
 }
 
@@ -35,17 +35,19 @@ export interface IGetStoryFail {
   payload: any;
 }
 
-export const getTopStoriesAction = (): IGetTopStories => ({
-  type: StoryActions.GET_TOP_STORIES,
+export const getTopStoryUIDListAction = (): IGetTopStoryUIDList => ({
+  type: StoryActions.GET_TOP_STORY_UID_LIST,
 });
-export const getTopStoriesSuccessAction = (
+export const getTopStoryUIDListActionSuccessAction = (
   payload: number[]
-): IGetTopStoriesSuccess => ({
-  type: StoryActions.GET_TOP_STORIES_SUCCESS,
+): IGetTopStoryUIDListSuccess => ({
+  type: StoryActions.GET_TOP_STORY_UID_LIST_SUCCESS,
   payload: payload,
 });
-export const getTopStoriesFailAction = (error: any): IGetTopStoriesFail => ({
-  type: StoryActions.GET_TOP_STORIES_FAIL,
+export const getTopStoryUIDListActionFailAction = (
+  error: any
+): IGetTopStoryUIDListFail => ({
+  type: StoryActions.GET_TOP_STORY_UID_LIST_FAIL,
   payload: error,
 });
 

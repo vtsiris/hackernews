@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { LoadingStateEnum } from "../../../models/SharedModel";
 import { IUserStory } from "../../../models/UserStoryModel";
-import { getTopStoriesAction } from "../../../redux/StoryRedux/StoryActions";
-import { getTopStoryListSelector } from "../../../redux/StoryRedux/StorySelector";
+import { getTopStoryUIDListAction } from "../../../redux/StoryRedux/StoryActions";
+import { getTopStoryUIDListSelector } from "../../../redux/StoryRedux/StorySelector";
 import { getUserStoryAction } from "../../../redux/UserStoryRedux/UserStoryActions";
 import {
   getUserStoryListLoadingStateSelector,
@@ -32,7 +32,7 @@ export default function DashboardBody({
 
   const dispatch = useDispatch();
 
-  const topStoryList: number[] = useSelector(getTopStoryListSelector);
+  const topStoryUIDList: number[] = useSelector(getTopStoryUIDListSelector);
   const userStoryList: IUserStory[] = useSelector(getUserStoryListSelector);
   const userStoryListLoadingState: LoadingStateEnum = useSelector(
     getUserStoryListLoadingStateSelector
@@ -42,18 +42,20 @@ export default function DashboardBody({
   const [storyList, setStoryList] = useState<IUserStory[]>([]);
 
   useEffect(() => {
-    dispatch(getTopStoriesAction());
+    console.log("1o");
+    dispatch(getTopStoryUIDListAction());
   }, [dispatch]);
 
   useEffect(() => {
-    const storyUIDList: number[] = (topStoryList || [])?.slice(
+    const storyUIDList: number[] = (topStoryUIDList || [])?.slice(
       storyListIndex - 10,
       storyListIndex
     );
+    console.log("2o");
     if (!!storyUIDList?.length) {
       dispatch(getUserStoryAction(storyUIDList));
     }
-  }, [topStoryList, storyListIndex, dispatch]);
+  }, [topStoryUIDList, storyListIndex, dispatch]);
 
   useLayoutEffect(() => {
     if (userStoryListLoadingState === LoadingStateEnum.CompletedState) {

@@ -3,31 +3,31 @@ import { AxiosResponse } from "axios";
 import {
   getStoryFailAction,
   getStorySuccessAction,
-  getTopStoriesFailAction,
-  getTopStoriesSuccessAction,
+  getTopStoryUIDListActionFailAction,
+  getTopStoryUIDListActionSuccessAction,
   IGetStory,
   StoryActions,
 } from "./StoryActions";
 import { IStory } from "../../models/StoryModel";
-import { getStoryAsync, getTopStoryListAsync } from "./StoryService";
+import { getStoryAsync, getTopStoryUIDListAsync } from "./StoryService";
 
 function* StorySaga() {
   yield all([
-    takeLatest(StoryActions.GET_TOP_STORIES, getTopStoryList),
+    takeLatest(StoryActions.GET_TOP_STORY_UID_LIST, getTopStoryUIDList),
     takeLatest(StoryActions.GET_STORY, getStory),
   ]);
 }
 
 export default StorySaga;
 
-function* getTopStoryList() {
+function* getTopStoryUIDList() {
   try {
     const response: AxiosResponse<number[]> = yield call(() =>
-      getTopStoryListAsync()
+      getTopStoryUIDListAsync()
     );
-    yield put(getTopStoriesSuccessAction(response?.data));
+    yield put(getTopStoryUIDListActionSuccessAction(response?.data));
   } catch (e: any) {
-    yield put(getTopStoriesFailAction(e));
+    yield put(getTopStoryUIDListActionFailAction(e));
   }
 }
 

@@ -3,13 +3,13 @@ import { IDefaultAction } from "../RootReducer";
 import { StoryActions } from "./StoryActions";
 
 interface IStoryReducer {
-  topStoryList: number[];
-  topStoryListLoadingState: LoadingStateEnum;
+  topStoryUIDList: number[];
+  topStoryUIDListLoadingState: LoadingStateEnum;
 }
 
 const initialStoryReducerState: IStoryReducer = {
-  topStoryList: [],
-  topStoryListLoadingState: LoadingStateEnum.InitialState,
+  topStoryUIDList: [],
+  topStoryUIDListLoadingState: LoadingStateEnum.InitialState,
 };
 
 const storyReducer = (
@@ -17,21 +17,21 @@ const storyReducer = (
   action: IDefaultAction
 ): IStoryReducer => {
   switch (action.type) {
-    case StoryActions.GET_STORY:
+    case StoryActions.GET_TOP_STORY_UID_LIST:
       return {
         ...state,
-        topStoryListLoadingState: LoadingStateEnum.LoadingState,
+        topStoryUIDListLoadingState: LoadingStateEnum.LoadingState,
       };
-    case StoryActions.GET_TOP_STORIES_SUCCESS:
+    case StoryActions.GET_TOP_STORY_UID_LIST_SUCCESS:
       return {
         ...state,
-        topStoryList: action.payload,
-        topStoryListLoadingState: LoadingStateEnum.InitialState,
+        topStoryUIDList: action.payload,
+        topStoryUIDListLoadingState: LoadingStateEnum.InitialState,
       };
-    case StoryActions.GET_STORY_FAIL:
+    case StoryActions.GET_TOP_STORY_UID_LIST_FAIL:
       return {
         ...state,
-        topStoryListLoadingState: LoadingStateEnum.ErrorState,
+        topStoryUIDListLoadingState: LoadingStateEnum.ErrorState,
       };
 
     default:
