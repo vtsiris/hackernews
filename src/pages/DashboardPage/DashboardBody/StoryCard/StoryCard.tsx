@@ -1,8 +1,10 @@
-import { IUserStory } from "../../../../models/UserStoryModel";
 import styles from "./StoryCard.module.scss";
+
 import StoryHeadline from "./StoryHeadline/StoryHeadline";
 import StoryImage from "./StoryImage/StoryImage";
 import StoryInformation from "./StoryInformation/StoryInformation";
+
+import { IUserStory } from "../../../../models/UserStoryModel";
 
 interface IStoryCardProps {
   userStory: IUserStory;

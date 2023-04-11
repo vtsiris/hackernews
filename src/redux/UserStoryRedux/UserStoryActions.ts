@@ -7,6 +7,8 @@ export enum UserStoryActions {
 
   GET_USER_STORY_LIST_SUCCESS = "GET_USER_STORY_LIST_SUCCESS",
   GET_USER_STORY_LIST_FAIL = "GET_USER_STORY_LIST_FAIL",
+
+  SORT_ASCENDING_USER_STORY_LIST = "SORT_ASCENDING_USER_STORY_LIST",
 }
 
 export interface IGetUserStory {
@@ -28,6 +30,10 @@ export interface IGetUserStoryListSuccess {
 export interface IGetUserStoryListFail {
   type: typeof UserStoryActions.GET_USER_STORY_LIST_FAIL;
   payload: any;
+}
+
+export interface ISortAscendingUserStoryList {
+  type: typeof UserStoryActions.SORT_ASCENDING_USER_STORY_LIST;
 }
 
 export const getUserStoryAction = (storyID: number[]): IGetUserStory => ({
@@ -53,4 +59,8 @@ export const getUserStoryListFailAction = (
 ): IGetUserStoryListFail => ({
   type: UserStoryActions.GET_USER_STORY_LIST_FAIL,
   payload: error,
+});
+
+export const sortUserStoryListAction = (): ISortAscendingUserStoryList => ({
+  type: UserStoryActions.SORT_ASCENDING_USER_STORY_LIST,
 });

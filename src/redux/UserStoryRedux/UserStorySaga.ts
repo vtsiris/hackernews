@@ -46,6 +46,7 @@ function* getUserStory(payload: IGetUserStory) {
       yield put(getUserStorySuccessAction());
     }
     if (!!userStoryList?.length) {
+      userStoryList.sort((a, b) => a?.story?.score - b?.story?.score);
       yield put(getUserStoryListSuccessAction(userStoryList));
     }
   } catch (e: any) {

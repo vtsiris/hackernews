@@ -1,7 +1,8 @@
 import styles from "./StoryHeadline.module.scss";
 
-import { IUserStory } from "../../../../../models/UserStoryModel";
 import moment from "moment";
+
+import { IUserStory } from "../../../../../models/UserStoryModel";
 
 interface IStoryHeadlineProps {
   userStory: IUserStory;

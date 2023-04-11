@@ -42,12 +42,22 @@ const userStoryReducer = (
       return {
         ...state,
         userStoryListLoadingState: LoadingStateEnum.CompletedState,
-        userStoryList: state.userStoryList.concat(...action.payload),
+        userStoryList: (state.userStoryList || [])?.concat(...action.payload),
       };
     case UserStoryActions.GET_USER_STORY_LIST_FAIL:
       return {
         ...state,
         userStoryListLoadingState: LoadingStateEnum.ErrorState,
+      };
+    case UserStoryActions.SORT_ASCENDING_USER_STORY_LIST:
+      console.log("redux");
+      return {
+        ...state,
+        userStoryList: [
+          ...(state.userStoryList || [])?.sort(
+            (a, b) => a?.story?.score - b?.story?.score
+          ),
+        ],
       };
 
     default:

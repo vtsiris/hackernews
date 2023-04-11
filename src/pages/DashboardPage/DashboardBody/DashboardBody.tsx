@@ -22,16 +22,12 @@ import {
 
 interface IDashboardBodyProps {
   hasOverflow: boolean;
-  sortNews: boolean;
   setHasOverflow: (arg: boolean) => void;
-  setSortNews: (arg: boolean) => void;
 }
 
 export default function DashboardBody({
   hasOverflow,
-  sortNews,
   setHasOverflow,
-  setSortNews,
 }: IDashboardBodyProps) {
   const containerRef = useRef(null);
 
@@ -60,27 +56,11 @@ export default function DashboardBody({
     }
   }, [topStoryUIDList, storyListIndex, dispatch]);
 
-  const setSortedUserStoryList = useCallback((list: IUserStory[]): void => {
-    const sortedStories: IUserStory[] = list.sort(
-      (a, b) => a?.story?.score - b?.story?.score
-    );
-    setStoryList(sortedStories);
-  }, []);
-
   useLayoutEffect(() => {
-    if (!!isUserStoryListLoadingCompleted && storyListIndex === 10) {
-      if (storyListIndex === 10) {
-        setSortedUserStoryList(userStoryList);
-      } else {
-        setStoryList(userStoryList);
-      }
+    if (!!isUserStoryListLoadingCompleted) {
+      setStoryList(userStoryList);
     }
-  }, [
-    isUserStoryListLoadingCompleted,
-    setSortedUserStoryList,
-    storyListIndex,
-    userStoryList,
-  ]);
+  }, [isUserStoryListLoadingCompleted, storyListIndex, userStoryList]);
 
   useLayoutEffect(() => {
     const container: HTMLDivElement | null =
@@ -92,11 +72,6 @@ export default function DashboardBody({
       setHasOverflow(elementOverflow);
     }
   }, [setHasOverflow, storyList]);
-
-  useLayoutEffect(() => {
-    setSortedUserStoryList(storyList);
-    setSortNews(false);
-  }, [setSortNews, setSortedUserStoryList, sortNews, storyList]);
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>): void => {
     const element = e?.target as HTMLDivElement;
