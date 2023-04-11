@@ -60,18 +60,27 @@ export default function DashboardBody({
     }
   }, [topStoryUIDList, storyListIndex, dispatch]);
 
+  const setSortedUserStoryList = useCallback((list: IUserStory[]): void => {
+    const sortedStories: IUserStory[] = list.sort(
+      (a, b) => a?.story?.score - b?.story?.score
+    );
+    setStoryList(sortedStories);
+  }, []);
+
   useLayoutEffect(() => {
-    if (!!isUserStoryListLoadingCompleted) {
+    if (!!isUserStoryListLoadingCompleted && storyListIndex === 10) {
       if (storyListIndex === 10) {
-        const sortedStories: IUserStory[] = userStoryList.sort(
-          (a, b) => a?.story?.score - b?.story?.score
-        );
-        setStoryList(sortedStories);
+        setSortedUserStoryList(userStoryList);
       } else {
         setStoryList(userStoryList);
       }
     }
-  }, [isUserStoryListLoadingCompleted, storyListIndex, userStoryList]);
+  }, [
+    isUserStoryListLoadingCompleted,
+    setSortedUserStoryList,
+    storyListIndex,
+    userStoryList,
+  ]);
 
   useLayoutEffect(() => {
     const container: HTMLDivElement | null =
@@ -85,12 +94,9 @@ export default function DashboardBody({
   }, [setHasOverflow, storyList]);
 
   useLayoutEffect(() => {
-    const sortedStories: IUserStory[] = (storyList || []).sort(
-      (a, b) => a?.story?.score - b?.story?.score
-    );
-    setStoryList(sortedStories);
+    setSortedUserStoryList(storyList);
     setSortNews(false);
-  }, [setSortNews, sortNews, storyList]);
+  }, [setSortNews, setSortedUserStoryList, sortNews, storyList]);
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>): void => {
     const element = e?.target as HTMLDivElement;
