@@ -16,6 +16,15 @@
   gap: 20px;
   float: left;
   padding-bottom: 60px;
+  cursor: pointer;
+}
+
+.cardContainer:hover {
+  @media (min-width: 1280px) {
+    transform: scale(1.01);
+    box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
+    z-index: 1;
+  }
 }
 
 .leftItem {
