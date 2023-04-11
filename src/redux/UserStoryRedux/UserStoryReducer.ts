@@ -50,7 +50,6 @@ const userStoryReducer = (
         userStoryListLoadingState: LoadingStateEnum.ErrorState,
       };
     case UserStoryActions.SORT_ASCENDING_USER_STORY_LIST:
-      console.log("redux");
       return {
         ...state,
         userStoryList: [

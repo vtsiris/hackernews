@@ -9,7 +9,6 @@ export default function DashboardHeader() {
   const dispatch = useDispatch();
 
   const sortNewsByAscendingScoreHandler = useCallback(() => {
-    console.log("here");
     dispatch(sortUserStoryListAction());
   }, [dispatch]);
 
