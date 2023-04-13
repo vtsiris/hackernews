@@ -1,6 +1,5 @@
 import {
   useCallback,
-  useContext,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -20,7 +19,6 @@ import {
   getUserStoryListIsCompletedLoadingStateSelector,
   getUserStoryListSelector,
 } from "../../../redux/UserStoryRedux/UserStorySelector";
-import StoryCardContext from "./StoryCard/StoryCardContext/StoryCard-Context";
 import StoryCardProvider from "./StoryCard/StoryCardContext/StoryCard-Provider";
 
 interface IDashboardBodyProps {
@@ -32,10 +30,8 @@ export default function DashboardBody({
   hasOverflow,
   setHasOverflow,
 }: IDashboardBodyProps) {
-  const containerRef = useRef(null);
-
+  const containerRef = useRef<any>();
   const dispatch = useDispatch();
-  const ctx = useContext(StoryCardContext);
 
   const topStoryUIDList: number[] = useSelector(getTopStoryUIDListSelector);
   const userStoryList: IUserStory[] = useSelector(getUserStoryListSelector);
@@ -67,8 +63,7 @@ export default function DashboardBody({
   }, [isUserStoryListLoadingCompleted, storyListIndex, userStoryList]);
 
   useLayoutEffect(() => {
-    const container: HTMLDivElement | null =
-      containerRef?.current as HTMLDivElement | null;
+    const container: HTMLDivElement = containerRef?.current;
     if (!!container) {
       const elementOverflow =
         container?.scrollHeight > container?.clientHeight ||
@@ -117,14 +112,6 @@ export default function DashboardBody({
           </div>
         )}
         {renderStoryList()}
-        {/* {(storyList || []).map((userStory: IUserStory, index: number) => {
-          ctx.setUserStory(userStory);
-          return (
-            <StoryCardProvider key={`${index}-${userStory?.story?.id}`}>
-              <StoryCard isLeftItem={index % 2 === 0} />
-            </StoryCardProvider>
-          );
-        })} */}
       </div>
       {!hasOverflow && !!isUserStoryListLoadingCompleted && (
         <div className={styles.loadMoreButtonWrapper}>
