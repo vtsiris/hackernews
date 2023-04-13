@@ -1,7 +1,9 @@
+import styles from "./DashboardFooter.module.scss";
+
 import { useSelector } from "react-redux";
+
 import { LoadingStateEnum } from "../../../models/SharedModel";
 import { getUserStoryListLoadingStateSelector } from "../../../redux/UserStoryRedux/UserStorySelector";
-import styles from "./DashboardFooter.module.scss";
 
 interface IDashboardFooterProps {
   hasOverflow: boolean;

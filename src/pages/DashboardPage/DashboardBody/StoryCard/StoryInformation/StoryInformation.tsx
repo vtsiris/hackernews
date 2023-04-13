@@ -1,24 +1,21 @@
 import styles from "./StoryInformation.module.scss";
+import { useContext } from "react";
 
-import { IUserStory } from "../../../../../models/UserStoryModel";
+import StoryCardContext from "../StoryCardContext/StoryCard-Context";
 
-interface IStoryInformationsProps {
-  userStory: IUserStory;
-}
+export default function StoryInformation() {
+  const ctx = useContext(StoryCardContext);
 
-export default function StoryInformation({
-  userStory,
-}: IStoryInformationsProps) {
   return (
     <>
       <span className={styles.information}>
-        Story score: <strong>{userStory?.story?.score}</strong>
+        Story score: <strong>{ctx?.userStory?.story?.score}</strong>
       </span>
       <span className={styles.information}>
-        Written by: <strong>{userStory?.user?.id}</strong>
+        Written by: <strong>{ctx?.userStory?.user?.id}</strong>
       </span>
       <span className={styles.information}>
-        Autor karma: <strong>{userStory?.user?.karma}</strong>
+        Autor karma: <strong>{ctx?.userStory?.user?.karma}</strong>
       </span>
     </>
   );

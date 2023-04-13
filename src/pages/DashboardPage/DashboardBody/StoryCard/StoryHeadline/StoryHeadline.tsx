@@ -1,22 +1,21 @@
+import { useContext } from "react";
 import styles from "./StoryHeadline.module.scss";
 
 import moment from "moment";
 
-import { IUserStory } from "../../../../../models/UserStoryModel";
+import StoryCardContext from "../StoryCardContext/StoryCard-Context";
 
-interface IStoryHeadlineProps {
-  userStory: IUserStory;
-}
+export default function StoryHeadline() {
+  const ctx = useContext(StoryCardContext);
 
-export default function StoryHeadline({ userStory }: IStoryHeadlineProps) {
   return (
     <div className={styles.headlineContainer}>
       <span className={styles.date}>
-        {moment(new Date(userStory?.story?.time * 1000).toUTCString()).format(
-          "MMM Do YYYY"
-        )}
+        {moment(
+          new Date((ctx?.userStory?.story?.time || 0) * 1000).toUTCString()
+        ).format("MMM Do YYYY")}
       </span>
-      <span className={styles.storyTitle}>{userStory?.story?.title}</span>
+      <span className={styles.storyTitle}>{ctx?.userStory?.story?.title}</span>
     </div>
   );
 }

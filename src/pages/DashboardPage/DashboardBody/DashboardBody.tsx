@@ -1,5 +1,6 @@
 import {
   useCallback,
+  useContext,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -19,6 +20,8 @@ import {
   getUserStoryListIsCompletedLoadingStateSelector,
   getUserStoryListSelector,
 } from "../../../redux/UserStoryRedux/UserStorySelector";
+import StoryCardContext from "./StoryCard/StoryCardContext/StoryCard-Context";
+import StoryCardProvider from "./StoryCard/StoryCardContext/StoryCard-Provider";
 
 interface IDashboardBodyProps {
   hasOverflow: boolean;
@@ -32,6 +35,7 @@ export default function DashboardBody({
   const containerRef = useRef(null);
 
   const dispatch = useDispatch();
+  const ctx = useContext(StoryCardContext);
 
   const topStoryUIDList: number[] = useSelector(getTopStoryUIDListSelector);
   const userStoryList: IUserStory[] = useSelector(getUserStoryListSelector);
@@ -86,6 +90,20 @@ export default function DashboardBody({
     setStoryListIndex((prevState: number) => prevState + 10);
   }, []);
 
+  const renderStoryList = (): JSX.Element[] => {
+    return (storyList || []).map((userStory: IUserStory, index: number) => {
+      return (
+        <StoryCardProvider key={`${index}-${userStory?.story?.id}`}>
+          <StoryCard
+            key={`${index}-${userStory?.story?.id}`}
+            userStory={userStory}
+            isLeftItem={index % 2 === 0}
+          />
+        </StoryCardProvider>
+      );
+    });
+  };
+
   return (
     <>
       <div
@@ -98,13 +116,15 @@ export default function DashboardBody({
             Please be patient while news are loading
           </div>
         )}
-        {(storyList || []).map((userStory: IUserStory, index: number) => (
-          <StoryCard
-            key={`${index}-${userStory?.story?.id}`}
-            userStory={userStory}
-            isLeftItem={index % 2 === 0}
-          />
-        ))}
+        {renderStoryList()}
+        {/* {(storyList || []).map((userStory: IUserStory, index: number) => {
+          ctx.setUserStory(userStory);
+          return (
+            <StoryCardProvider key={`${index}-${userStory?.story?.id}`}>
+              <StoryCard isLeftItem={index % 2 === 0} />
+            </StoryCardProvider>
+          );
+        })} */}
       </div>
       {!hasOverflow && !!isUserStoryListLoadingCompleted && (
         <div className={styles.loadMoreButtonWrapper}>
